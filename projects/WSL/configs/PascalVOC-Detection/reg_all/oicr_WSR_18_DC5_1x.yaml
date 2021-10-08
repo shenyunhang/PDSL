@@ -1,0 +1,46 @@
+_BASE_: "../oicr_WSR_18_DC5_1x.yaml"
+WSL:
+  REFINE_NUM: 4
+  REFINE_REG: [True, True, True, True]
+  #SAMPLING:
+    #SAMPLING_ON: False
+    #IOU_THRESHOLDS: [[0.35], [0.4], [0.45], [0.5]]
+    #IOU_THRESHOLDS: [[0.5], [0.5], [0.5], [0.5]]
+    #IOU_LABELS: [[0, 1], [0, 1], [0, 1], [0, 1]]
+    #BATCH_SIZE_PER_IMAGE: [512, 512, 512, 512]
+    #POSITIVE_FRACTION: [1.0, 1.0, 1.0, 1.0]
+TEST:
+  EVAL_PERIOD: 1000
+#MODEL:
+  #WEIGHTS: "models/DRN-WSOD/resnet18_ws_model_120_d2_20210204.pkl"
+  #WEIGHTS: "models/wsl_resnet18_210-b4b5cc40.pth"
+  #WEIGHTS: "models/wsl_resnet18_210-7e694fb4.pth"
+  #WEIGHTS: "models/wsl_resnet18_210-765a288c.pth"
+  #WEIGHTS: "models/wsl_resnet18_210-73da9e7a.pth"
+  #WEIGHTS: "models/wsl_resnet18_210-607c84ea.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-f4cb1718.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-24f8247d.pth"
+  #WEIGHTS: "models/wsl_resnet18_185-394197cf.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-196aa7ea.pth"
+  #WEIGHTS: "models/wsl_resnet18_210-82140d2b.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-4d1cbe25.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-e963c000.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-3b4ff8f0.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-18fe9abd.pth"
+  #WEIGHTS: "models/wsl_resnet18_120-dec1c6ce.pth"
+  #WEIGHTS: "../pytorch-image-models/output/train/20210223-191716-wsl_resnet18-224/wsl_resnet18_210-765de29e.pth"
+  #PIXEL_MEAN: [123.675, 116.280, 103.530]
+  #PIXEL_STD: [58.395, 57.120, 57.375]
+  #BACKBONE:
+    #FREEZE_AT: 2
+  #ROI_HEADS:
+    #IOU_THRESHOLDS: [0.1, 0.5]
+    #IOU_LABELS: [-1, 0, 1]
+#INPUT:
+  #FORMAT: "RGB"
+#SOLVER:
+  #STEPS: (35000, 50000)
+  #MAX_ITER: 50000  # 40.0 epochs for 07
+  #WARMUP_ITERS: 0
+  #IMS_PER_BATCH: 4
+  #BASE_LR: 0.01

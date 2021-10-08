@@ -1,0 +1,7 @@
+git+https://github.com/lucasb-eyer/pydensecrf.git
+git+https://github.com/cocodataset/panopticapi.git 
+opencv-python
+sklearn
+scikit-image
+shapely
+graphviz

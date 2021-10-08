@@ -1,0 +1,30 @@
+_BASE_: "../oicr_WSR_50_DC5_1x.yaml"
+WSL:
+  REFINE_NUM: 4
+  REFINE_REG: [True, True, True, True]
+  #SAMPLING:
+    #SAMPLING_ON: True
+    #IOU_THRESHOLDS: [[0.35], [0.4], [0.45], [0.5]]
+    #IOU_THRESHOLDS: [[0.5], [0.5], [0.5], [0.5]]
+    #IOU_LABELS: [[0, 1], [0, 1], [0, 1], [0, 1]]
+    #BATCH_SIZE_PER_IMAGE: [512, 512, 512, 512]
+    #POSITIVE_FRACTION: [1.0, 1.0, 1.0, 1.0]
+TEST:
+  EVAL_PERIOD: 1000
+MODEL:
+  WEIGHTS: "../pytorch-image-models/output/train/20210220-021936-wsl_resnet50-224/wsl_resnet50_120-77867885.pth"
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  #PIXEL_STD: [58.395, 57.12, 57.375]
+  #BACKBONE:
+    #FREEZE_AT: 2
+  #ROI_HEADS:
+    #IOU_THRESHOLDS: [0.1, 0.5]
+    #IOU_LABELS: [-1, 0, 1]
+INPUT:
+  FORMAT: "RGB"
+#SOLVER:
+  #STEPS: (35000, 50000)
+  #MAX_ITER: 50000  # 40.0 epochs for 07
+  #WARMUP_ITERS: 0
+  #IMS_PER_BATCH: 4
+  #BASE_LR: 0.01
