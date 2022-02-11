@@ -466,6 +466,9 @@ class OICROutputLayers(nn.Module):
         self.refine_k = refine_k
         self.refine_reg = refine_reg
 
+        if not self.refine_reg[self.refine_k]:
+            del self.bbox_pred
+
     @classmethod
     def from_config(cls, cfg, input_shape, refine_k):
         return {
