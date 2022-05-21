@@ -27,7 +27,7 @@ python3 -m pip install -e .
 
 ## Dataset Preparation
 
-#### PASCAL VOC 2012:
+### PASCAL VOC 2012:
 Please follow [this](https://github.com/shenyunhang/PDSL/blob/PDSL/datasets/README.md#expected-dataset-structure-for-pascal-voc) to creating symlinks for PASCAL VOC.
 
 Also download SBD data:
@@ -43,7 +43,7 @@ Convert VOC 2012 and SBD to our format:
 python3 projects/WSL/tools/convert_voc2012_and_sbd_instance.py
 ```
 
-Download MCG proposal from [here](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/mcg/) to detectron/datasets/data, and transform it to pickle serialization format:
+Download MCG proposal from [here](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/mcg/) to datasets/proposals, and transform it to pickle serialization format:
 ```
 cd datasets/proposals
 tar xvzf MCG-Pascal-Segmentation_trainvaltest_2012-boxes.tgz
@@ -54,7 +54,7 @@ python3 projects/WSL/tools/proposal_convert.py voc_2012_val_instance datasets/pr
 python3 projects/WSL/tools/proposal_convert.py sbd_9118_instance datasets/proposals/MCG-SBD-trainval-boxes datasets/proposals/mcg_sbd_9118_instance_d2.pkl
 ```
 
-#### COCO:
+### COCO:
 Please follow [this](https://github.com/shenyunhang/PDSL/blob/PDSL/datasets/README.md#expected-dataset-structure-for-coco-instancekeypoint-detection) to creating symlinks for MS COCO.
 
 Download
@@ -64,7 +64,7 @@ wget https://dl.fbaipublicfiles.com/detectron/coco/coco_annotations_minival.tgz
 
 Please follow [this](https://github.com/facebookresearch/Detectron/blob/main/detectron/datasets/data/README.md#coco-minival-annotations) to download `minival` and `valminusminival` annotations.
 
-Download MCG proposal from [here](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/mcg/) to detectron/datasets/data, and transform it to pickle serialization format:
+Download MCG proposal from [here](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/mcg/) to datasets/proposals, and transform it to pickle serialization format:
 ```
 cd datasets/proposals
 tar xvzf MCG-COCO-train2014-boxes.tgz
@@ -86,12 +86,16 @@ mv models $PDSL
 Then we have the following directory structure:
 ```
 PDSL
-|_ models
-|  |_ DRN-WSOD
-|     |_ resnet18_ws_model_120.pkl
-|     |_ resnet150_ws_model_120.pkl
-|     |_ resnet101_ws_model_120.pkl
-|_ ...
+├── models
+│   ├── DRN-WSOD
+│   │   ├── resnet101_ws_model_120_d2.pkl
+│   │   ├── resnet101_ws_model_120.pkl
+│   │   ├── resnet18_ws_model_120_d2.pkl
+│   │   ├── resnet18_ws_model_120.pkl
+│   │   ├── resnet50_ws_model_120_d2.pkl
+│   │   ├── resnet50_ws_model_120.pkl
+│   │   ├── densenet121_ws_model_120.pkl
+├── ...
 ```
 
 
@@ -101,17 +105,17 @@ PDSL
 
 ResNet18-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_18_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_18_DC5_voc2012_sbd_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_18_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_18_DC5_voc2012_sbd_`date +'%Y%m%d_%H%M%S'`
 ```
 
 ResNet50-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_50_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_50_DC5_voc2012_sbd_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_50_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_50_DC5_voc2012_sbd_`date +'%Y%m%d_%H%M%S'`
 ```
 
 ResNet101-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_101_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_101_DC5_voc2012_sbd_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/PascalVOC-InstanceSegmentation/pdsl_WSR_101_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_101_DC5_voc2012_sbd_`date +'%Y%m%d_%H%M%S'`
 ```
 
 
@@ -119,17 +123,17 @@ python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --n
 
 ResNet18-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_18_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_18_DC5_coco_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_18_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_18_DC5_coco_`date +'%Y%m%d_%H%M%S'`
 ```
 
 ResNet50-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_50_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_50_DC5_coco_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_50_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_50_DC5_coco_`date +'%Y%m%d_%H%M%S'`
 ```
 
 ResNet101-WS
 ```
-python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_101_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_101_DC5_coco_`date +'%Y-%m-%d_%H-%M-%S'`
+python3.9 projects/WSL/tools/train_net.py --dist-url "tcp://127.0.0.1:52044" --num-gpus 4 --config-file projects/WSL/configs/COCO-InstanceSegmentation/pdsl_WSR_101_DC5_1x.yaml OUTPUT_DIR output/pdsl_WSR_101_DC5_coco_`date +'%Y%m%d_%H%M%S'`
 ```
 
 ### Results
